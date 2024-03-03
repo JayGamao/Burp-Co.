@@ -8,225 +8,174 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <style>
-        .menu-button {
-            cursor: pointer;
-        }
+   body{
+    background-color: #eaf4fd;
+}   
+       
 
-        .menu-button.selected {
-            background-color: #ccc; /* Add your selected style here */
-        }</style>
-</head>
-<body>
-    <header>
-        <nav>
-            <div style="text-align: center;">
-                <a href="burpco.html" style="display: flex; align-items: center; text-decoration: none; color: black;">
-                    <img class="logo" src="img/logo.png" alt="The Burp Co. Logo">
-                    <h1 style="margin: 0;">The Burp Co.</h1>
-                </a>
+    </style>
+
+<header>
+    <nav>
+        <div style="text-align: center;">
+            <a href="burpco.html" style="display: flex; align-items: center; text-decoration: none; color: black;">
+                <img class="logo" src="img/logo.png" alt="The Burp Co. Logo">
+                <h1 style="margin: 0;">The Burp Co.</h1>
+            </a>
+        </div>
+        <div>
+            <a href="burpco.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="about.html">About Us</a>
+            <a href="service.html">Contact Us</a>
+            <div class="cart" onclick="toggleCart()">
+                <img src="img/cart.png" alt="Cart">
+                <span class="notification" id="cartNotification">0</span>
             </div>
-            <div>
-                <a href="burpco.html">Home</a>
-                <a href="menu.html">Menu</a>
-                <a href="about.html">About Us</a>
-                <a href="#">Service</a>
-                <div class="cart" onclick="toggleCart()">
-                    <img src="img/cart.png" alt="Cart">
-                    <span class="notification" id="cartNotification">0</span>
+            <div class="avatar">
+                <img  class="round-avatar" src="img/avatar.png" id="avatarButton" alt="User" onclick="toggleAuth()">
+                <div id="authButtons" class="auth-box" style="display: none;">
+                    <button id="signInButton" class="auth-button">Sign In</button>
+                    <button id="signOutButton" style="display: none;" class="auth-button">Sign Out</button>
                 </div>
-                <div class="avatar"    id="avatar">
-                    <img src="img/avatar.png " onclick="googleLogin()"  alt="User">
-                </div>
-
-            </div>
-        </nav>
-
-        <div class="shopping-cart" id="cart">
-            <h2>Shopping Cart</h2>
-            <ul id="cart-items"></ul>
-            <div class="cart-total">
-                <p>Total: $<span id="cartTotal">0.00</span></p>
-                <button onclick="checkout()">Checkout</button>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <div class="dashboard">
-        <img src="img/banner.png" alt="">
+    <div class="shopping-cart" id="cart">
+        <h2>Shopping Cart</h2>
+        <ul id="cart-items"></ul>
+        <div class="cart-total">
+            <p>Total: $<span id="cartTotal">0.00</span></p>
+            <button onclick="checkout()">Checkout</button>
+        </div>
     </div>
- 
-    <div class="dashboard-menu">
+</header>
+</head>
+<body>
+    
+<section class="menu-bg">
+    <div class="dashboard">
+        <h2 id="quote">"Good food is the foundation of genuine happiness."</h2>
+        <img src="img/dashboard.jpeg">
+    </div>
+      <div class="dashboard-menu">
         <a href="#" onclick="showMenu('Cakes')">Cakes</a>
         <a href="#" onclick="showMenu('Pie')">Pie</a>
         <a href="#" onclick="showMenu('Drinks')">Drinks</a>
         <a href="#" onclick="showMenu('Snacks')">Snacks</a>
     </div>
-
     <div class="menu-content" id="Cakes">
-        <div class="products-container">
-            <div class="product" data-name="Blueberry Muffin" data-specialization="$2.99" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake2.jpeg" alt="Blueberry Muffin">
-                <h2>Blueberry Muffin</h2>
-            <button onclick="addToCart('Blueberry Muffin', 2.99, 'img/cake2.jpeg')">+</button>
-            </div>
-    
-            <div class="product" data-name="Chocolate Croissant" data-specialization="$3.49" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake3.jpeg" alt="Chocolate Croissant">
-                <h2>Chocolate Croissant</h2>
-                <button onclick="addToCart('Chocolate Croissant', 3.49, 'img/cake3.jpeg')">+</button>
-            </div>
-    
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-        </div>    </div>
-
-    <div class="menu-content" id="Pie" style="display: none;">
-        <div class="products-container">
-            <div class="product" data-name="Egg Pie" data-specialization="$2.99" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/pie1.jpeg" alt="Egg Pie">
-                <h2>Egg Pie</h2>
-            <button onclick="addToCart('Egg Pie', 2.99, 'img/pie1.jpeg')">+</button>
-            </div>
-    
-            <div class="product" data-name="Chocolate Croissant" data-specialization="$3.49" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake3.jpeg" alt="Chocolate Croissant">
-                <h2>Chocolate Croissant</h2>
-                <button onclick="addToCart('Chocolate Croissant', 3.49, 'img/cake3.jpeg')">+</button>
-            </div>
-    
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-        </div>    </div>
-
-    <div class="menu-content" id="Drinks" style="display: none;">
-        <div class="products-container">
-            <div class="product" data-name="Blueberry Muffin" data-specialization="$2.99" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake2.jpeg" alt="Blueberry Muffin">
-                <h2>Blueberry Muffin</h2>
-            <button onclick="addToCart('Blueberry Muffin', 2.99, 'img/cake2.jpeg')">+</button>
-            </div>
-    
-            <div class="product" data-name="Chocolate Croissant" data-specialization="$3.49" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake3.jpeg" alt="Chocolate Croissant">
-                <h2>Chocolate Croissant</h2>
-                <button onclick="addToCart('Chocolate Croissant', 3.49, 'img/cake3.jpeg')">+</button>
-            </div>
-    
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-        </div>    </div>
-
-    <div class="menu-content" id="Snacks" style="display: none;">
-        <div class="products-container">
-            <div class="product" data-name="Blueberry Muffin" data-specialization="$2.99" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake2.jpeg" alt="Blueberry Muffin">
-                <h2>Blueberry Muffin</h2>
-            <button onclick="addToCart('Blueberry Muffin', 2.99, 'img/cake2.jpeg')">+</button>
-            </div>
-    
-            <div class="product" data-name="Chocolate Croissant" data-specialization="$3.49" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake3.jpeg" alt="Chocolate Croissant">
-                <h2>Chocolate Croissant</h2>
-                <button onclick="addToCart('Chocolate Croissant', 3.49, 'img/cake3.jpeg')">+</button>
-            </div>
-    
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-            <div class="product" data-name="Strawberry Danish" data-specialization="$2.79" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa. Ultricies mi quis hendrerit dolor magna.">
-                <img src="img/cake1.jpeg" alt="Strawberry Danish">
-                <h2>Strawberry Danish</h2>
-                <button onclick="addToCart('Strawberry Danish', 2.79, 'img/cake1.jpeg')">+</button>
-            </div>
-        </div>    
+        <div class="products-container" id="cakes-container">
+        </div>
     </div>
-    
+    <div class="menu-content" id="Pie">
+        <div class="products-container" id="pie-container">
+        </div>
+    </div>
+    <div class="menu-content" id="Drinks">
+        <div class="products-container" id="drinks-container">
+        </div>
+    </div>
+    <div class="menu-content" id="Snacks">
+        <div class="products-container" id="snacks-container">
+        </div>
+    </div>
+  
 
 
-    <div class="content">
+    <div class="content" style="display: none;">
         <div class="contentDetail"></div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+      </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-   
-    <script src="script.js"></script>
     <script> 
-    
-    
-    function showMenu(menuType) {
-        $('.menu-content').hide();
-        $('#' + menuType).show();
-        
+    const productsData = [
+            { category: "Cakes", name: "Chocolate Cake", specialization: "₱350.99", description: "Moist and decadent chocolate cake that will satisfy your sweet cravings.", imgSrc: "img/cake1.jpeg", available: true },
+            { category: "Cakes", name: "Red Velvet Cake", specialization: "₱350.00", description: "Indulge in the velvety goodness of this classic red velvet cake, topped with a luscious cream cheese frosting.", imgSrc: "img/cake2.jpeg", available: true },
+            { category: "Cakes", name: "Mango Passionfruit Cake", specialization: "₱480.00", description: "Dive into the tropical goodness of mango and passionfruit with this moist and flavorful cake.", imgSrc: "img/cake3.jpeg", available: true },
+            { category: "Cakes", name: "Vanilla Almond Cake", specialization: "₱380.50", description: "Enjoy the subtle sweetness of vanilla paired with the crunch of almonds in this delightful vanilla almond cake.", imgSrc: "img/cake4.jpeg", available: true },
+            { category: "Cakes", name: "Red Velvet Cheesecake", specialization: "₱520.75", description: "Experience the perfect blend of red velvet and creamy cheesecake, a taste of luxury in every bite.", imgSrc: "img/cake5.jpeg" , available: true},
+            { category: "Cakes", name: "Lemon Blueberry Cake", specialization: "₱360.50", description: "Refreshing lemon flavor combined with juicy blueberries, creating a delightful and tangy cake.", imgSrc: "img/cake6.jpeg" , available: true},
+            { category: "Cakes", name: "Tiramisu", specialization: "₱320.75", description: "A classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cheese, dusted with cocoa powder.", imgSrc: "img/cake7.jpeg", available: true },
+            { category: "Cakes", name: "Coffee Tiramisu", specialization: "₱420.99", description: "A coffee-infused delight with layers of mascarpone and cocoa, perfect for coffee enthusiasts.", imgSrc: "img/cake8.jpeg" },
+
+            { category: "Pie", name: "Classic Apple Pie", specialization: "₱280.25", description: "A timeless classic featuring sweet and spiced apple filling encased in a golden, flaky crust.", imgSrc: "img/apple pie.jpeg" , available: true},
+            { category: "Pie", name: "Banana Nutella Pie", specialization: "₱340.99", description: "A delightful combination of ripe bananas and creamy Nutella, nestled in a buttery pie crust.", imgSrc: "img/pie2.jpeg", available: true },
+            { category: "Pie", name: "Strawberry Rhubarb Pie", specialization: "₱310.50", description: "A perfect balance of sweet strawberries and tart rhubarb, encased in a flaky and buttery pie crust.", imgSrc: "img/pie3.jpeg" , available: true},
+            { category: "Pie", name: "Chocolate Peanut Butter Pie", specialization: "₱380.00", description: "A heavenly combination of rich chocolate and creamy peanut butter in a delectable pie.", imgSrc: "img/pie4.jpeg", available: true },
+            { category: "Pie", name: "Pecan Pie", specialization: "₱420.99", description: "Savor the buttery and nutty goodness of pecans in this classic and irresistible pecan pie.", imgSrc: "img/pecan-pie.jpeg" },
+
+            { category: "Drinks", name: "Iced Caramel Macchiato", specialization: "₱180.00", description: "A refreshing blend of espresso, milk, and caramel, served over ice for the perfect pick-me-up.", imgSrc: "img/machiato.jpeg", available: true },
+            { category: "Drinks", name: "Peach Iced Tea", specialization: "₱150.99", description: "A refreshing and fruity iced tea infused with the sweet essence of ripe peaches.", imgSrc: "img/peach ice tea.jpeg" },
+            { category: "Drinks", name: "Matcha Latte", specialization: "₱190.00", description: "Embrace the earthy and vibrant flavors of matcha in a comforting latte, perfect for matcha enthusiasts.", imgSrc: "img/matcha.jpeg" , available: true},
+            { category: "Drinks", name: "Strawberry Lemonade", specialization: "₱160.50", description: "Quench your thirst with the delightful combination of sweet strawberries and zesty lemonade.", imgSrc: "img/strawberry lemondae.jpeg" , available: true},
+            { category: "Drinks", name: "Tropical Fruit Smoothie", specialization: "₱150.50", description: "A tropical delight with a blend of fresh fruits, yogurt, and ice, creating a smooth and satisfying smoothie.", imgSrc: "img/tropical.jpeg" },
+            { category: "Drinks", name: "Mint Mojito", specialization: "₱160.75", description: "Cool and refreshing mint combined with lime and soda, a perfect mocktail for a hot day.", imgSrc: "img/mojito.jpeg" , available: true},
+            { category: "Drinks", name: "Hazelnut Hot Chocolate", specialization: "₱200.99", description: "A rich and comforting blend of hazelnut and chocolate, perfect for warming up on a chilly day.", imgSrc: "img/hot choco.jpeg", available: true },
+
+            { category: "Snacks", name: "Crispy Cheese Sticks", specialization: "₱120.00", description: "Irresistibly crispy on the outside, gooey and cheesy on the inside, these cheese sticks are the perfect snack.", imgSrc: "img/stick.jpeg", available: true },
+            { category: "Snacks", name: "Truffle Parmesan Popcorn", specialization: "₱250.00", description: "Elevate your snacking experience with the luxurious flavor of truffle oil and savory Parmesan cheese on perfectly popped popcorn.", imgSrc: "img/pop.jpeg" , available: true},
+            { category: "Snacks", name: "Spicy Chicken Wings", specialization: "₱180.50", description: "Get ready for a flavor explosion with these spicy chicken wings, perfect for those who love a kick of heat.", imgSrc: "img/wongs.jpeg", available: true },
+            { category: "Snacks", name: "Garlic Parmesan Fries", specialization: "₱150.75", description: "Crispy golden fries tossed in a flavorful blend of garlic and parmesan, a delicious and satisfying snack.", imgSrc: "img/fries.jpeg" , available: true},
+            { category: "Snacks", name: "Assorted Sushi Rolls", specialization: "₱220.00", description: "A delightful assortment of fresh and flavorful sushi rolls, perfect for a quick and tasty snack.", imgSrc: "img/sushi.jpeg", available: true },
+            { category: "Snacks", name: "Spinach Artichoke Dip", specialization: "₱190.99", description: "Creamy and cheesy spinach artichoke dip, the perfect dip for your favorite chips or crackers.", imgSrc: "img/spinach.jpeg", available: true }
+        ];
+
+        function generateProductElements(products, containerId) {
+    const productsContainer = document.getElementById(containerId);
+    productsContainer.innerHTML = '';
+
+    for (const product of products) {
+        const productElement = document.createElement('div');
+        productElement.classList.add('product');
+        productElement.dataset.name = product.name;
+        productElement.dataset.specialization = product.specialization;
+        productElement.dataset.description = product.description;
+
+        if (!product.available) {
+            productElement.classList.add('unavailable');
+        }
+
+        const imgElement = document.createElement('img');
+        imgElement.src = product.imgSrc;
+        imgElement.alt = product.name;
+
+        const h2Element = document.createElement('h2');
+        h2Element.textContent = product.name;
+
+        const buttonElement = document.createElement('button');
+        buttonElement.textContent = product.available ? '+' : 'x';
+        buttonElement.addEventListener('click', () => {
+            if (product.available) {
+                addToCart(product.name, product.specialization, product.imgSrc);
+            }
+        });
+
+        productElement.appendChild(imgElement);
+        productElement.appendChild(h2Element);
+        productElement.appendChild(buttonElement);
+
+        productsContainer.appendChild(productElement);
     }
+}
+
+generateProductElements(productsData.filter(product => product.category === "Cakes"), "cakes-container");
+generateProductElements(productsData.filter(product => product.category === "Pie"), "pie-container");
+generateProductElements(productsData.filter(product => product.category === "Drinks"), "drinks-container");
+generateProductElements(productsData.filter(product => product.category === "Snacks"), "snacks-container");
+        </script>
+    <script src="burpco.js"></script>
+    <script src="service.cs"></script>
+    <script src="menu.js"></script>
+    <script type="module" src="script.js"></script>
+
+<script>
+
+</script>
+   
     
-    </script>
-    
+
 </body>
 </html>

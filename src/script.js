@@ -1,146 +1,130 @@
 
 
-let cartItems = [];
-let cartTotal = 0;
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+ 
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-// Load cart items from localStorage on page load
-document.addEventListener('DOMContentLoaded', function () {
-    cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    updateCart();
-});
+const firebaseConfig = {
+  apiKey: "AIzaSyC4_8JEoKyrtE1AogQWPrZRHzVU0YuV8Xg",
+  authDomain: "burp-f0078.firebaseapp.com",
+  projectId: "burp-f0078",
+  storageBucket: "burp-f0078.appspot.com",
+  messagingSenderId: "248194890847",
+  appId: "1:248194890847:web:dd1036a9d33604b2c16fea"
+};
 
-function addToCart(itemName, itemPrice, itemImgSrc) {
-    const existingItem = cartItems.find(item => item.name === itemName);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const provider = new GoogleAuthProvider();
 
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        const newItem = {
-            name: itemName,
-            price: itemPrice,
-            quantity: 1,
-            imgSrc: itemImgSrc
-        };
-        cartItems.push(newItem);
-    }
+const signInButton = document.getElementById("signInButton");
+const signOutButton = document.getElementById("signOutButton");
+const userName = document.getElementById("userName");
+const userEmail = document.getElementById("userEmail");
+const avatarButton = document.getElementById("avatarButton"); 
+const authButtons = document.getElementById('authButtons')
 
-    // Save cart items to localStorage
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
-    updateCart();
-}
+signOutButton.style.display = "none";
 
-function adjustQuantity(itemName, action) {
-    const existingItem = cartItems.find(item => item.name === itemName);
+const toggleAuth = () => {
+  authButtons.style.display = authButtons.style.display === "none" ? "block" : "none";
+};
 
-    if (existingItem) {
-        if (action === 'increment') {
-            existingItem.quantity += 1;
-        } else if (action === 'decrement' && existingItem.quantity > 1) {
-            existingItem.quantity -= 1;
-        } else if (action === 'decrement' && existingItem.quantity === 1) {
-            cartItems = cartItems.filter(item => item.name !== itemName);
+avatarButton.addEventListener('click', toggleAuth);
+
+document.addEventListener('click', (event) => {
+  if (!avatarButton.contains(event.target) && !authButtons.contains(event.target)) {
+      authButtons.style.display = 'none';
+  }
+});   
+ 
+const userSignIn = async () => {
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            const user = result.user;
+            console.log(user);
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+        });
+};
+
+const userSignOut = async () => {
+    signOut(auth)
+        .then(() => {
+            alert("You have signed out successfully!");
+        })
+        .catch((error) => {});
+};
+const updateAvatar = (user) => {
+  console.log("Updating avatar");
+
+  const avatarButton = document.getElementById("avatarButton");
+
+  if (user && user.photoURL) {
+      console.log("User photoURL:", user.photoURL);
+      avatarButton.src = user.photoURL;
+  } else {
+      console.log("No user photoURL");
+      avatarButton.src = "img/avatar.png";
+  }
+};
+const welcomeUser = (user) => {
+    if (user) {
+        if (userName) {
+            userName.innerHTML = user.displayName;
         }
+        if (userEmail) {
+            userEmail.innerHTML = user.email;
+        }
+        updateAvatar(user);
+        signInButton.style.display = "none";
+    } else {
+        if (userName) {
+            userName.innerHTML = "";
+        }
+        if (userEmail) {
+            userEmail.innerHTML = "";
+        }
+        updateAvatar(null);
+        signInButton.style.display = "block";
     }
+};
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+      // Auto-fill name and email fields if the user is signed in
+      document.getElementById("userNameInput").value = user.displayName || "";
+      document.getElementById("userEmailInput").value = user.email || "";
+      
+      // Update other parts of the welcome logic as needed
+      signOutButton.style.display = "block";
+      welcomeUser(user);
+      signInButton.style.display ="none";
+  } else {
+      // Clear name and email fields if the user signs out
+      document.getElementById("userNameInput").value = "";
+      document.getElementById("userEmailInput").value = "";
 
-    // Save cart items to localStorage
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-
-    updateCart();
-}
-
-function updateCart() {
-    const cartItemsElement = document.getElementById('cart-items');
-    const cartTotalElement = document.getElementById('cartTotal');
-    const cartNotificationElement = document.getElementById('cartNotification');
-
-    // Clear previous items
-    cartItemsElement.innerHTML = '';
-
-    // Update cart items
-    cartItems.forEach(item => {
-        const listItem = document.createElement('li');
-
-        // Create an image element
-        const productImage = document.createElement('img');
-        productImage.src = item.imgSrc;
-        productImage.alt = item.name;
-        productImage.classList.add('product-image');
-
-        listItem.appendChild(productImage);
-
-        // Add other details to the list item
-        const itemDetails = document.createElement('div');
-        itemDetails.classList.add('item-details');
-
-        const itemName = document.createElement('p');
-        itemName.textContent = item.name;
-
-        const itemPrice = document.createElement('p');
-        itemPrice.textContent = `$${(item.price * item.quantity).toFixed(2)}`;
-
-        itemDetails.appendChild(itemName);
-        itemDetails.appendChild(itemPrice);
-
-        listItem.appendChild(itemDetails);
-
-        // Add quantity controls
-        const quantityControls = document.createElement('div');
-        quantityControls.classList.add('quantity-controls');
-        quantityControls.innerHTML = `
-            <button onclick="adjustQuantity('${item.name}', 'increment')">+</button>
-            <span class="product-quantity" id="productQuantity_${item.name}">${item.quantity}</span>
-            <button onclick="adjustQuantity('${item.name}', 'decrement')">-</button>
-        `;
-
-        // Append quantity controls to the list item
-        listItem.appendChild(quantityControls);
-
-        // Append the list item to cart
-        cartItemsElement.appendChild(listItem);
-    });
-
-    // Update cart total
-    cartTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-    cartTotalElement.textContent = cartTotal.toFixed(2);
-
-    // Update cart notification
-    cartNotificationElement.textContent = cartItems.length;
-}
-
-// Rest of your code remains unchanged
-
-
-let products = document.querySelectorAll(".product");
-let closeBtn = document.getElementById("closeBtn");
-
-products.forEach(function (product) {
-    product.addEventListener("mouseover", function () {
-        let productName = product.getAttribute("data-name");
-        let productPrice = product.getAttribute("data-specialization");
-        let description = product.getAttribute("data-description");
-        let imageSource = product.firstElementChild.src;
-
-        document.querySelector(".content").style.display = "flex";
-        document.querySelector(".contentDetail").innerHTML = `
-            <img src="${imageSource}">
-            <div>
-                <h1>${productName}</h1>
-                <p>${productPrice}</p>
-                <p>${description}</p>
-            </div>
-        `;
-    });
-
-    product.addEventListener("mouseout", function () {
-        document.querySelector(".content").style.display = "none";
-    });
+      signOutButton.style.display = "none";
+      welcomeUser(null);
+  }
 });
 
 
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    signOutButton.style.display = "block";
+    welcomeUser(user);
+    signInButton.style.display ="none";
+  } else {
+    signOutButton.style.display = "none";
+    welcomeUser(null);
+  }
+});
 
-
-
+signInButton.addEventListener('click', userSignIn);
+signOutButton.addEventListener('click', userSignOut);
 
 var slideIndex = 0;
 showSlides();
@@ -157,10 +141,10 @@ function showSlides() {
   setTimeout(showSlides, 3000); 
 }
 document.addEventListener('DOMContentLoaded', function () {
-  document.body.style.transition = 'opacity 0.5s ease-in-out'; // Set more advanced transition
+  document.body.style.transition = 'opacity 0.5s ease-in-out'; 
 });
 
-// Handle page transitions
+// Handle pag
 document.addEventListener('click', function (e) {
   if (e.target.tagName === 'A' && e.target.getAttribute('href')) {
       e.preventDefault();
@@ -174,9 +158,3 @@ document.addEventListener('click', function (e) {
 });
 
 
-function toggleCart() {
-  var cart = document.getElementById("cart");
-  cart.style.display = cart.style.display === "none" ? "block" : "none";
-}
-    
-//LOGIN GOOGLE

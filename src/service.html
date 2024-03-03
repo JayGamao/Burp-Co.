@@ -19,15 +19,18 @@
             <a href="burpco.html">Home</a>
             <a href="menu.html">Menu</a>
             <a href="about.html">About Us</a>
-            <a href="#">Service</a>
+            <a href="service.html">Contact Us</a>
             <div class="cart" onclick="toggleCart()">
                 <img src="img/cart.png" alt="Cart">
                 <span class="notification" id="cartNotification">0</span>
             </div>
-            <div class="avatar"    id="avatar">
-                <img src="img/avatar.png " onclick="googleLogin()"  alt="User">
+            <div class="avatar">
+                <img  class="round-avatar" src="img/avatar.png" id="avatarButton" alt="User" onclick="toggleAuth()">
+                <div id="authButtons" class="auth-box" style="display: none;">
+                    <button id="signInButton" class="auth-button">Sign In</button>
+                    <button id="signOutButton" style="display: none;" class="auth-button">Sign Out</button>
+                </div>
             </div>
-
         </div>
     </nav>
 
@@ -52,15 +55,15 @@
             </div>
             <div class="contact-container">
 
-                <form action="https://api.web3forms.com/submit" method="post" id="contactForm" class="contact-form">
+                <form action="https://formsubmit.co/jaymaxeygamao@gmail.com" method="post" id="contactForm" class="contact-form">
                     <input type="hidden" name="access_key" value="02fedc6e-b332-409d-a385-c6bbd6bb425d">
                     <div class="form-group">
                         <label for="name">Your Name:</label>
-                        <input type="text" id="name" name="name" class="input-field" required>
+                        <input type="text" id="userNameInput" name="name" class="input-field" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Your Email:</label>
-                        <input type="email" id="email" name="email" class="input-field" required>
+                        <input type="email" id="userEmailInput" name="email" class="input-field" required>
                     </div>
                     <div class="form-group">
                         <label for="contactNumber">Contact Number:</label>
@@ -117,70 +120,9 @@
         </section>
     </main>
 
-    <script src="script.js"></script>
-    <script>
-       
-    document.getElementById('contactForm').addEventListener('submit', function (event) {
-        try {
-            // Validate Star Rating
-            if (!validateStarRating()) {
-                throw new Error('Please select a star rating.');
-            }
-
-            // Validate Email Format
-            if (!validateEmailFormat()) {
-                throw new Error('Please enter a valid email address.');
-            }
-
-            // Validate Name Format
-            if (!validateNameFormat()) {
-                throw new Error('Please enter a valid name.');
-            }
-
-            // Validate Contact Number Format
-            if (!validateContactNumberFormat()) {
-                throw new Error('Please enter a valid contact number.');
-            }
-
-            // Validate Mandatory Fields
-            if (!validateMandatoryFields()) {
-                throw new Error('Concerns and Message are mandatory fields.');
-            }
-
-
-        } catch (error) {
-            alert(error.message);
-            event.preventDefault(); // Prevent form submission
-        }
-    });
-    
-    function validateStarRating() {
-        return document.querySelector('.star-rating input:checked') !== null;
-    }
-
-    function validateEmailFormat() {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const emailInput = document.getElementById('email').value;
-        return emailRegex.test(emailInput);
-    }
-
-    function validateNameFormat() {
-        const nameRegex = /^[A-Za-z\s]+$/;
-        const nameInput = document.getElementById('name').value;
-        return nameRegex.test(nameInput);
-    }
-
-    function validateContactNumberFormat() {
-        const contactNumberRegex = /^\d+$/;
-        const contactNumberInput = document.getElementById('contactNumber').value;
-        return contactNumberRegex.test(contactNumberInput);
-    }
-
-    function validateMandatoryFields() {
-        const concernsInput = document.getElementById('concerns').value;
-        const messageInput = document.getElementById('message').value;
-        return concernsInput.trim() !== '' && messageInput.trim() !== '';
-    }
-    </script>
+    <script type="module" src="script.js"></script>
+<script src="burpco.js"></script>
+<script src="service.cs"></script>
+<script src="menu.js"></script>
 </body>
 </html>
