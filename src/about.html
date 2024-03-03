@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    .about-us-container {
+        background-color: #f5f5f5;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .about-us-content {
+        padding-top: 80px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .about-us-title {
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .about-us-description {
+        font-size: 1.1em;
+        line-height: 1.6;
+        gap: 155px;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+    .about-us-highlights {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 15px;
+
+        margin-top: 30px;
+    }
+
+    .highlight {
+        flex: 0 0 30%;
+        padding: 10px;
+        margin-bottom: 20px;
+        text-align: left;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .highlight h3 {
+        font-size: 1.2em;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .highlight p {
+        font-size: 1em;
+        color: #555;
+    }
+
+    .branch-introduction {
+        text-align: center;
+        padding: 40px 20px;
+        background-color: #f5f5f5;
+    }
+
+    .branch-introduction h2 {
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .branch {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .branch-item {
+        flex: 0 0 30%;
+        padding: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .branch-item:hover {
+        transform: scale(1.05);
+    }
+
+    .branch-item img {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .branch-item:hover img {
+        transform: scale(1.1);
+    }
+
+    .branch-item h3 {
+        font-size: 1.5em;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .branch-item p {
+        font-size: 1em;
+        color: #555;
+    }
+
+
+    iframe {
+        width: 100%;
+        height: 400px;
+        border: 0;
+        border-radius: 8px;
+    }
+
+    .location-container {
+    position: relative;
+    text-align: center; /* Center text within the container */
+}
+
+    .location-info {
+        text-align: center; /* Center text within the info box */
+        padding: 20px;
+        width: 80%;
+        margin: 10px auto; /* Center the info box horizontally */
+        color: lightgray;
+        border-radius: 8px;
+        background-color: #333;
+    }
+
+    @media screen and (max-width: 768px) {
+        .about-us-content {
+            padding-top: 40px;
+        }
+
+        .highlight,
+        .branch-item {
+            flex: 0 0 100%;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div style="text-align: center;">
+                <a href="burpco.html" style="display: flex; align-items: center; text-decoration: none; color: black;">
+                    <img class="logo" src="img/logo.png" alt="The Burp Co. Logo">
+                    <h1 style="margin: 0;">The Burp Co.</h1>
+                </a>
+            </div>
+            <div>
+                <a href="burpco.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="about.html">About Us</a>
+                <a href="#">Service</a>
+                <div class="cart" onclick="toggleCart()">
+                    <img src="img/cart.png" alt="Cart">
+                    <span class="notification" id="cartNotification">0</span>
+                </div>
+                <div class="avatar">
+                    <img src="img/avatar.png" alt="User">
+                </div>
+            </div>
+        </nav>
+
+        <div class="shopping-cart" id="cart">
+            <h2>Shopping Cart</h2>
+            <ul id="cart-items"></ul>
+            <div class="cart-total">
+                <p>Total: $<span id="cartTotal">0.00</span></p>
+                <button onclick="checkout()">Checkout</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="about-us-container">
+        <div class="about-us-content">
+            <h2 class="about-us-title">About Us</h2>
+            <p class="about-us-description">
+                Welcome to The Burp Co., where flavors come alive! We are passionate about creating delightful culinary experiences that leave you craving for more. Our commitment to quality and innovation sets us apart in the world of gastronomy.
+            </p>
+            <div class="about-us-highlights">
+                <div class="highlight">
+                    <h3>Our Mission</h3>
+                    <p>Bringing joy through delectable food, one bite at a time. We aim to create a unique dining experience that lingers on your taste buds.</p>
+                </div>
+                <div class="highlight">
+                    <h3>Quality Ingredients</h3>
+                    <p>We source only the finest ingredients to ensure every dish is a masterpiece. Quality is not just a choice; it's our commitment to you.</p>
+                </div>
+                <div class="highlight">
+                    <h3>Passionate Chefs</h3>
+                    <p>Our chefs pour their passion into every recipe, crafting each dish with precision and love. The result? Culinary perfection on your plate.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="branch-introduction">
+        <h2>Our Branches</h2>
+        <div class="branch">
+            <div class="branch-item">
+                <img src="img/puan-branch.jpg" alt="Puan Branch">
+                <h3>The Burp Co. (TBC) - Puan Branch</h3>
+                <p>39 Libby Road, Talomo, Davao City, Davao del Sur</p>
+                <a href="#puan" onclick="scrollToLocation('puan')">
+                 See more
+                </a>
+            </div>
+
+            <div class="branch-item">
+                <img src="img/juna-branch.jpg" alt="Juna Branch">
+                    <h3>The Burp Co. (Juna Branch)</h3>
+                    <p>Casaloda, Juna Ave, Talomo, Davao City, 8000 Davao del Sur</p>
+                <a href="#juna" onclick="scrollToLocation('juna')">
+                    See more
+
+                </a>
+            </div>
+
+            <div class="branch-item">
+                <img src="img/sm-branch.jpg" alt="SM Branch">
+                    <h3>The Burp Co. (TBC SM Branch)</h3>
+                    <p>111 Quimpo Blvd, Talomo, Davao City, Davao del Sur</p>
+                <a href="#sm" onclick="scrollToLocation('sm')">
+                    See more
+
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div  class="location-container">
+        <div  id="puan" class="location-info">
+
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1979.8211046906645!2d125.53682034442748!3d7.051261299999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f90dc67c0934c7%3A0x59897c7e0bfdec7f!2sThe%20Burp%20Co.%20(TBC)%20-%20Puan%20Branch!5e0!3m2!1sen!2sph!4v1708883053827!5m2!1sen!2sph" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <h2>The Burp Co. (TBC) - Puan Branch</h2>
+            <p>39 Libby Road, Talomo, Davao City, Davao del Sur</p>
+        </div>
+        <div id="juna"  class="location-info">
+        <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1951.1527412600135!2d125.59276602475904!3d7.060057292420264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f90d16723793c3%3A0x4c7a644f84db48b4!2sThe%20Burp%20Co.%20(Juna%20Branch)!5e0!3m2!1sen!2sph!4v1708882916664!5m2!1sen!2sph" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <h2>The Burp Co. (Juna Branch)</h2>
+            <p>Casaloda, Juna Ave, Talomo, Davao City, 8000 Davao del Sur</p>
+        </div>
+
+        <div id="sm" class="location-info">
+        <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1951.2243721082812!2d125.59062135600035!3d7.059899890199401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f90cd53723b79d%3A0x3a869f30e1a7a6e8!2sSM%20City%20Davao!5e0!3m2!1sen!2sph!4v1708882954099!5m2!1sen!2sph" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <h2>The Burp Co. (TBC SM Branch)</h2>
+            <p>111 Quimpo Blvd, Talomo, Davao City, Davao del Sur</p>
+        </div>
+    </div>
+    <div class="background-images-container" id="backgroundImagesContainer"></div>
+
+</body>
+<script></script>
+<script src="script.js"></script>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sign-In</title>
+  
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
+    
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCelqWhrtPF-7d7NCrjYIycaMi_46C6NGI",
+            authDomain: "burp-co.firebaseapp.com",
+            databaseURL: "https://burp-co-default-rtdb.firebaseio.com",
+            projectId: "burp-co",
+            storageBucket: "burp-co.appspot.com",
+            messagingSenderId: "401074555257",
+            appId: "1:401074555257:web:57e0d0bdc88b831c4647a8",
+
+        };
+
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <h1>Google Sign-In Example</h1>
+
+    <!-- Google Sign-In button -->
+    <button onclick="signInWithGoogle()">Sign In with Google</button>
+
+    <script>
+        function signInWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+
+            firebase.auth().signInWithPopup(provider)
+                .then((result) => {
+                    // This gives you a Google Access Token
+                    const token = result.credential.accessToken;
+
+                    // The signed-in user info
+                    const user = result.user;
+
+                    console.log("Successfully signed in with Google:", user);
+                })
+                .catch((error) => {
+                    // Handle errors here
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+
+                    console.error("Google Sign-In Error:", errorCode, errorMessage);
+                });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>The Burp Co.</title>
+    <style></style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div style="text-align: center;">
+            <a href="burpco.html" style="display: flex; align-items: center; text-decoration: none; color: black;">
+                <img class="logo" src="img/logo.png" alt="The Burp Co. Logo">
+                <h1 style="margin: 0;">The Burp Co.</h1>
+            </a>
+        </div>
+        <div>
+            <a href="burpco.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="about.html">About Us</a>
+            <a href="#">Service</a>
+            <div class="cart" onclick="toggleCart()">
+                <img src="img/cart.png" alt="Cart">
+                <span class="notification" id="cartNotification">0</span>
+            </div>
+            <div class="avatar">
+                <img src="img/avatar.png" alt="User">
+            </div>
+        </div>
+    </nav>
+
+    <div class="shopping-cart" id="cart">
+        <h2>Shopping Cart</h2>
+        <ul id="cart-items"></ul>
+        <div class="cart-total">
+            <p>Total: $<span id="cartTotal">0.00</span></p>
+            <button onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+</header>
+<main>
+    <body>
+
+    <div class="slideshow-container">
+        
+        <div class="mySlides fade">
+            <img src="img/1.jpeg" alt="Slide 1">
+        </div>
+        <div class="mySlides fade">
+            <img src="img/2.jpeg" alt="Slide 2">
+        </div>
+        <div class="mySlides fade">
+            <img src="img/3.jpeg" alt="Slide 3">
+        </div>
+        <div class="order-now-button">
+            <a href="#menu">Order Now</a>
+          </div>
+    </div>
+    <div class="showcase">
+        <p>Hand Made CAKES - BROWNIES - PIES</p>
+    </div>
+    </div>
+    <div class="second-section">
+        <img class="bpimg" src="img/4.jpeg">
+        <p style="text-align: center; font-size: 18px; color: #555; line-height: 1.5;">
+            You can't just eat good food. You've got to talk about it<br>
+            <span class="section-button">
+                <a href="#about-us">Find more about us</a>
+            </span>
+        </p>
+        
+        
+        <section class="testimonials">
+            <h2>WHAT PEOPLE SAY</h2>
+            <div class="testimonial-box">
+                <p><strong>Davao Food Guide:</strong> The Burp Co. is a cake and pies store at Juna Subdivision who’s getting traction for their very sulit and barato yet lami for its quality na whole cakes.</p>
+            </div>
+            <div class="testimonial-box">
+                <p><strong>The Food Therapy:</strong> They offer scrumptious taste of freshly baked pastries that are made of premium and quality ingredients.</p>
+            </div>
+            <div class="testimonial-box">
+                <p><strong>Bisag Asa:</strong> Their CHEESECAKE PIES is a must try!</p>
+            </div>
+        </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 The Burp.Co | All Rights Reserved</p>
+    <p>Designed by <a href="#">Jay Gamao</a></p>
+
+    <div class="social-icons">
+        <a href="#" target="_blank">Facebook</a>
+        <a href="#" target="_blank">Twitter</a>
+        <a href="#" target="_blank">Instagram</a>
+    </div>
+</footer>
+<script type="module" src="script.js"></script>
+<script></script>
+</body>
+</html>
